@@ -1,7 +1,7 @@
 // title:  game title
 // desc:   short description
 // author: txgruppi
-// version: 20210315.0
+// version: __VERSION__
 // script: wren
 
 // TODO
