@@ -1,5 +1,5 @@
-// title:  game title
-// desc:   short description
+// title:  bomberman
+// desc:   code by Tarcisio Gruppi, graphics by Stepan Krapivin
 // author: txgruppi
 // version: __VERSION__
 // script: wren
