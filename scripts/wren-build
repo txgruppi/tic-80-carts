@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const path = require("path");
+
+const loading = {};
+const modules = {};
+
+function load(input) {
+  const data = fs
+    .readFileSync(input, { encoding: "utf-8" })
+    .split("\n")
+    .map((line) => {
+      if (/^import "[/.].+"$/.test(line)) {
+        const modulepath =
+          path.resolve(path.dirname(input), line.split('"')[1]) + ".wren";
+        if (modules[modulepath]) {
+          return null;
+        }
+        if (loading[modulepath]) {
+          throw new Error(`circular reference`);
+        }
+        loading[modulepath] = true;
+        let moduledata = load(modulepath).trim();
+        loading[modulepath] = false;
+        modules[modulepath] = true;
+        return "\n" + moduledata;
+      }
+      return line;
+    })
+    .filter((v) => v !== null)
+    .join("\n");
+  return data;
+}
+
+let [, , entryFile, outputFile] = process.argv;
+
+if (!entryFile.endsWith(".wren")) {
+  throw new Error(`input must be a .wren file`);
+}
+
+if (!outputFile) {
+  outputFile = entryFile.slice(0, -5) + ".out.wren";
+}
+
+entryFile = path.resolve(process.cwd(), entryFile);
+outputFile = path.resolve(process.cwd(), outputFile);
+
+const data = load(entryFile);
+fs.writeFileSync(outputFile, data);
