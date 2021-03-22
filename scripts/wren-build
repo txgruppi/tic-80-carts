@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 
+const versionTag = "__VERSION__";
 const loading = {};
 const modules = {};
 
@@ -25,6 +26,13 @@ function load(input) {
         loading[modulepath] = false;
         modules[modulepath] = true;
         return "\n" + moduledata;
+      }
+      if (line.endsWith(versionTag)) {
+        const now = new Date();
+        const version = `${now.getFullYear()}.${
+          now.getMonth() + 1
+        }.${now.getDate()}`;
+        line = line.slice(0, -versionTag.length) + version;
       }
       return line;
     })
