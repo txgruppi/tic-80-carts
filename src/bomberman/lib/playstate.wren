@@ -233,10 +233,24 @@ class PlayState {
 		}
 		TIC.rect(x, y, 8*6, 8*4, 3)
 		TIC.print("player " + (player.number + 1).toString, x, y, 2)
-		TIC.print(player.bombCountMax.toString + " (" + player.bombCount.toString + ")", x+10, y+10, 2)
+
+		if (player.bombCountMax > player.bombCount) {
+			var startPos = player.bombCount
+			var emptyCount = player.bombCountMax - player.bombCount - 1
+			for (i in 0..emptyCount) {
+				TIC.spr(SPR["BOMB_OUTLINE"], (startPos+i)*8+x, y+8, 0)
+			}
+		}
+
+		if (player.bombCount > 0) {
+			for (i in 0..player.bombCount-1) {
+				TIC.spr(SPR["SMALL_BOMB"], i*8+x, y+8, 0)
+			}
+		}
+
 		TIC.print(player.bombPower, x+10, y+18, 2)
-		TIC.spr(57, x, y+8, 0)
-		TIC.spr(59, x, y+16, 0)
+		//TIC.spr(SPR["UI_BOMB_COUNT"], x, y+8, 0)
+		TIC.spr(SPR["UI_BLAST_POWER"], x, y+16, 0)
 	}
 
 	checkEndGame(game) {
