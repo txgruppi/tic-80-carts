@@ -24,10 +24,10 @@ class GameOverState {
 
 		if (_winner == -1) {
 			TIC.print("draw", 0, 0, 14)
-			return
+		} else {
+			TIC.print("player " + (_winner + 1).toString + " won", 0, 0, 14)
 		}
 
-		TIC.print("player " + (_winner + 1).toString + " won", 0, 0, 14)
 		TIC.print("wins", 0, 8, 14)
 		for (i in 0..._numberOfPlayers) {
 			TIC.print("player %(i+1): %(Global.wins[i])", 8, 8 * (i + 2), 14)
