@@ -8,13 +8,11 @@ class Bomb is Entity {
 		sprite = Sprites.smallBomb
 		_power = power
 		_playerNumber = playerNumber
-		framesToLive = 110
-		_framesForSecondStage = 55
+		framesToLive = 120
 	}
 
 	power { _power }
 	playerNumber { _playerNumber }
-	framesForSecondStage { _framesForSecondStage }
 
 	TIC() {
 		if (framesToLive % 30 == 0) {
