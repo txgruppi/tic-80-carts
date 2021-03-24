@@ -252,7 +252,7 @@ class PlayState {
 
 	checkEndGame(game) {
 		if (_players.count == 0) {
-			game.state = GameOverState.new(null, -1)
+			game.state = GameOverState.new(null, -1, _numberOfPlayers)
 		} else	if (_players.count == 1) {
 			game.state = GameOverState.new(null, _players[0].number, _numberOfPlayers)
 		}
