@@ -6,7 +6,9 @@ class GameOverState {
 		_scores = scores
 		_winner = winner
 		_numberOfPlayers = numberOfPlayers
-		Global.incWin(_winner)
+		if (_winner != -1) {
+			Global.incWin(_winner)
+		}
 		_btnDown = false
 	}
 
