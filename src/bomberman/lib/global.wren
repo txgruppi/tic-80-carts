@@ -9,11 +9,8 @@ class Global {
   }
   __wins[playerNumber] = __wins[playerNumber]  + 1
  }
-}
 
-var SPR = {
-  "SMALL_BOMB": 22,
-  "BOMB_OUTLINE": 38,
-  "UI_BOMB_COUNT": 57,
-  "UI_BLAST_POWER": 59
+ static wins {
+  return __wins
+ }
 }

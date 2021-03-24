@@ -254,7 +254,7 @@ class PlayState {
 		if (_players.count == 0) {
 			game.state = GameOverState.new(null, -1)
 		} else	if (_players.count == 1) {
-			game.state = GameOverState.new(null, _players[0].number)
+			game.state = GameOverState.new(null, _players[0].number, _numberOfPlayers)
 		}
 	}
 	

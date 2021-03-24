@@ -17,7 +17,10 @@ class PowerUp is Entity {
 			player.bombCount = player.bombCount + 1
 			return
 		}
-		player.bombPower = player.bombPower + 1
+		if (_kind == 2) {
+			player.bombPower = player.bombPower + 1
+			return
+		}
 	}
 
 	TIC() {

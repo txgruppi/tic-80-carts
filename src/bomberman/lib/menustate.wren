@@ -1,9 +1,11 @@
 import "../../lib/input"
+import "./global"
 
 class MenuState {
 	construct new() {
 		_index = 0
 		_actionDown = null
+		Global.resetWins()
 	}
 
 	handleInput(game) {
