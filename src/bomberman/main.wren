@@ -1,6 +1,6 @@
 // title:  bomberman
-// desc:   code by Tarcisio Gruppi, graphics by Stepan Krapivin
-// author: txgruppi
+// desc:   A bomberman inspired game
+// author: txgruppi and xevin
 // version: __VERSION__
 // script: wren
 
