@@ -122,9 +122,6 @@ class PlayState {
 
 	tickBombOrFire(o) {
 		o.framesToLive = o.framesToLive - 1
-		if (o is Bomb && o.framesToLive <= o.framesForSecondStage && TIC.fget(o.sprite, 1)) {
-			o.sprite = o.sprite + 1
-		}
 		if (o.framesToLive > 0) {
 			return
 		}
@@ -154,8 +151,8 @@ class PlayState {
 			}
 			for (o in _bombsAndFires) {
 				if (o is Bomb && collide(o.position.x, o.position.y, start.x, start.y)) {
-					if (o.framesToLive > o.framesForSecondStage) {
-						o.framesToLive = o.framesForSecondStage
+					if (o.framesToLive > fire.framesToLive) {
+						o.framesToLive = fire.framesToLive
 					}
 					return
 				}
@@ -238,19 +235,19 @@ class PlayState {
 			var startPos = player.bombCount
 			var emptyCount = player.bombCountMax - player.bombCount - 1
 			for (i in 0..emptyCount) {
-				TIC.spr(SPR["BOMB_OUTLINE"], (startPos+i)*8+x, y+8, 0)
+				TIC.spr(Sprites.bombOutline, (startPos+i)*8+x, y+8, 0)
 			}
 		}
 
 		if (player.bombCount > 0) {
 			for (i in 0..player.bombCount-1) {
-				TIC.spr(SPR["SMALL_BOMB"], i*8+x, y+8, 0)
+				TIC.spr(Sprites.smallBomb, i*8+x, y+8, 0)
 			}
 		}
 
 		TIC.print(player.bombPower, x+10, y+18, 2)
-		//TIC.spr(SPR["UI_BOMB_COUNT"], x, y+8, 0)
-		TIC.spr(SPR["UI_BLAST_POWER"], x, y+16, 0)
+		//TIC.spr(Sprites.uibBombCount, x, y+8, 0)
+		TIC.spr(Sprites.uiBombPower, x, y+16, 0)
 	}
 
 	checkEndGame(game) {

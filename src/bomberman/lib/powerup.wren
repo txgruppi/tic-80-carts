@@ -1,11 +1,14 @@
 import "../../lib/vec2d"
 import "../../lib/entity"
+import "../../lib/numberutils"
+import "./palette"
+import "./sprites"
 
 class PowerUp is Entity {
 	construct new(position, kind) {
 		super(position, Vec2d.tile)
 		_kind = kind
-		sprite = (kind == 1) ? 56 : 58
+		sprite = (kind.abs == 1) ? Sprites.powerUpBombCount : Sprites.powerUpBombPower
 	}
 
 	apply(player) {

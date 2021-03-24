@@ -1,10 +1,11 @@
 import "../../lib/vec2d"
 import "../../lib/entity"
+import "./sprites"
 
 class Fire is Entity {
 	construct new(position) {
 		super(position, Vec2d.tile)
-		sprite = 40
+		sprite = Sprites.fire
 		_spriteCount = 4
 		framesToLive = 30
 		_framesPerSprite = framesToLive / _spriteCount

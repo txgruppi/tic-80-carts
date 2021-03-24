@@ -1,10 +1,11 @@
 import "../../lib/vec2d"
 import "../../lib/entity"
+import "./sprites"
 
 class Box is Entity {
 	construct new(position) {
 		super(position, Vec2d.tile)
-		sprite = 30
+		sprite = Sprites.box
 		framesToLive = null
 	}
 

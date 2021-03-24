@@ -2,6 +2,7 @@ import "../../lib/vec2d"
 import "../../lib/numberutils"
 import "../../lib/entity"
 import "./palette"
+import "./sprites"
 
 class Player is Entity {
 	construct new(number, position) {
@@ -9,7 +10,7 @@ class Player is Entity {
 		_number = number
 		_targetPosition = position
 		_previousPosition = position
-		sprite = 32
+		sprite = Sprites.player
 		_bombCount = 1
 		_bombPower = 1
 		_bombCountMax = 1
