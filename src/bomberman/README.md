@@ -1,4 +1,4 @@
-# bomberman inpired game for tic-80
+# bomberman inspired game for tic-80
 
 ## how to build
 
