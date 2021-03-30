@@ -30,7 +30,7 @@ class MenuState {
 		if (Input.any.justDown) dy = dy + 1
 		_index = _index + dy
 		if (_index < 0) {
-			_index = 2
+			_index = 1
 		} else if (_index > 1) {
 			_index = 0
 		}

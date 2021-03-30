@@ -60,6 +60,11 @@ class Player is Entity {
 				}
 			}
 		}
+
+		if (!alive) {
+			sprite = Sprites.deadPlayer
+		}
+
 		Palette.updateForPlayer(number)
 		TIC.spr(sprite, position.x, position.y, 0, 1, 0, rotate, size.x / 8, size.y / 8)
 		Palette.reset()

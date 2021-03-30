@@ -12,4 +12,5 @@ class Sprites {
  static uiBombPower { 59 }
  static titleChar01 { 256 }
  static titleChar02 { 258 }
+ static deadPlayer { 16 }
 }
