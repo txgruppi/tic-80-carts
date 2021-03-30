@@ -1,5 +1,6 @@
 import "../../lib/input"
 import "./global"
+import "./titlescreen"
 
 class MenuState {
 	construct new() {
@@ -39,8 +40,11 @@ class MenuState {
 		handleInput(game)
 
 		TIC.cls()
-		TIC.print(" 2 players", 0, 0, 14)
-		TIC.print(" 4 players", 0, 8, 14)
-		TIC.print(">", 0, 8*_index, 14)
+
+		TitleScreen.TIC()
+
+		TIC.print(" 2 players", 0, 100, 14)
+		TIC.print(" 4 players", 0, 108, 14)
+		TIC.print(">", 0, 100 + 8*_index, 14)
 	}
 }

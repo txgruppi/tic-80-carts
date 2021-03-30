@@ -17,9 +17,9 @@ class Palette {
 			Palette.set(9, 7)
 			Palette.set(8, 7)
 		} else if (number == 2) {
-			Palette.set(8, 15)
-			Palette.set(9, 14)
-			Palette.set(10, 13)
+			Palette.set(8, 6)
+			Palette.set(9, 11)
+			Palette.set(10, 11)
 		} else if (number == 3) {
 			Palette.set(8, 13)
 			Palette.set(10, 13)

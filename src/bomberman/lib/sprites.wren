@@ -10,4 +10,6 @@ class Sprites {
  static uiBombCount { 57 }
  static powerUpBombPower { 58 }
  static uiBombPower { 59 }
+ static titleChar01 { 256 }
+ static titleChar02 { 258 }
 }
