@@ -12,8 +12,8 @@ The compiled file will be `dist/bomberman.wren`
   - enemy AI
 - simple mechanic to push bombs
 - loots with negative effects (- bombs, - power)
-- speed-up loot
-- check victory condition
+- loot which accelerates the player
+- check victory condition (three wins?)
   - show winer table
   - draw winner's cup
 - exit from current game to main menu
