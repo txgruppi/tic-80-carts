@@ -8,6 +8,12 @@ The compiled file will be `dist/bomberman.wren`
 
 ## todo
 
-- Add single player mode / enemy AI
+- Add single player mode
+  - enemy AI
 - simple mechanic to push bombs
 - loots with negative effects (- bombs, - power)
+- speed-up loot
+- check victory condition
+  - show winer table
+  - draw winner's cup
+- exit from current game to main menu
