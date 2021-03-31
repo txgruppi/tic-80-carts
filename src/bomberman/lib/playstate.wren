@@ -21,11 +21,13 @@ class PlayState {
 			_numberOfPlayers > 2 ? Player.new(2, _arena.position.clone + _arena.size.clone - [16, _arena.size.y - 8]) : null,
 			_numberOfPlayers > 2 ? Player.new(3, _arena.position.clone + _arena.size.clone - [_arena.size.x - 8, 16]) : null,
 		].where{ |o| o != null }.toList
-		_alivePlayers = []
 		_bombsAndFires = []
 		_boxes = []
 		_powerUps = []
 	}
+
+	alivePlayers { _players.where { |p| p.alive }}
+	deadPlayers { _players.where { |p| !p.alive }}
 
 	handlePlayerInput(player) {
 		if (!player.alive) return
@@ -67,7 +69,7 @@ class PlayState {
 			var tileX = (targetX - _arena.position.x) / 8
 			var tileY = (targetY - _arena.position.y) / 8
 			if (TIC.fget(TIC.mget(tileX, tileY),0)) return
-			for (other in _alivePlayers) {
+			for (other in alivePlayers) {
 				if (other != player && collide(targetX, targetY, other.position.x, other.position.y)) {
 					return
 				}
@@ -206,7 +208,7 @@ class PlayState {
 	collidePlayersAndFires() {
 		for (o in _bombsAndFires) {
 			if (o is Fire) {
-				for (player in _alivePlayers) {
+				for (player in alivePlayers) {
 					if (collide(player.position.x, player.position.y, o.position.x, o.position.y)) {
 						player.alive = false
 					}
@@ -252,9 +254,9 @@ class PlayState {
 	}
 
 	checkEndGame(game) {
-		if (_alivePlayers.count == 0) {
+		if (alivePlayers.count == 0) {
 			game.state = GameOverState.new(null, -1, _numberOfPlayers)
-		} else	if (_alivePlayers.count == 1) {
+		} else	if (alivePlayers.count == 1) {
 			game.state = GameOverState.new(null, _players[0].number, _numberOfPlayers)
 		}
 	}
@@ -288,7 +290,11 @@ class PlayState {
 			}
 		}
 
-		for (player in _players) {
+		for (player in deadPlayers) {
+			player.TIC()
+		}
+
+		for (player in alivePlayers) {
 			handlePlayerInput(player)
 			movePlayer(player)
 			player.TIC()
@@ -297,8 +303,6 @@ class PlayState {
 
 		collidePlayersAndFires()
 
-		/* _players = _players.where { |o| o.alive }.toList */
-		_alivePlayers = _players.where { |o| o.alive }.toList
 		_bombsAndFires = _bombsAndFires.where { |o| o.alive }.toList
 		_boxes = _boxes.where { |o| o.alive }.toList
 
