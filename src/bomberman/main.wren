@@ -4,30 +4,64 @@
 // version: __VERSION__
 // script: wren
 
-// TODO
-// 1. Add player death animation (20 frames)
-// 2. prevent placing a bomb on top of an existing bomb
-
 import "random" for Random
-import "./lib/global"
-import "./lib/menustate"
-import "./lib/playstate"
-import "./lib/gameoverstate"
+import "./inputs/gamepad"
+import "./scenes/menu"
+import "./components/scoreboard"
 
 class Game is TIC {
 	construct new() {
-		_state = MenuState.new()
-		Global.resetWins()
+  _scene = MenuScene.new(this)
+		_scoreBoard = ScoreBoard.new()
 	}
 
-	state { _state }
-	state=(v) { _state = v }
+	scoreBoard { _scoreBoard }
+	scene { _scene }
+	scene=(v) { _scene = v }
+
+	gamepad {
+  if (_gamepad == null) {
+   _gamepad = GamepadInput.new()
+  }
+  return _gamepad
+	}
+
+	collide(subject, otherOrList) {
+		if (!(subject is Vec2d)) {
+			subject = subject.position
+		}
+		return collide(subject.x, subject.y, otherOrList)
+	}
+
+	collide(x, y, otherOrList) {
+		if (otherOrList is List) {
+			for (other in otherOrList) {
+				var obj = collide(x, y, other)
+				if (obj) {
+					return obj
+				}
+			}
+			return false
+		}
+		var pos = otherOrList
+		if (!(pos is Vec2d)) {
+			pos = pos.position
+		}
+		if (collide(x, y, pos.x, pos.y)) {
+			return otherOrList
+		}
+		return false
+	}
+
+	collide(x0, y0, x1, y1) {
+		return (x0 - x1).abs < Vec2d.tileSize.x && (y0 - y1).abs < Vec2d.tileSize.y
+	}
 
 	TIC() {
-		_state.TIC(this)
+		gamepad.TIC()
+  _scene.TIC()
 	}
 }
-
 
 // <TILES>
 // 000:1111112112131111111111111111121111111111113111131111111121111111

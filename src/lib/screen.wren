@@ -9,4 +9,6 @@ class Screen {
 		}
 		return __size
 	}
+
+	static toString { "Screen(%(position.x),%(position.y),%(size.x),%(size.y))" }
 }

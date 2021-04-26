@@ -11,21 +11,26 @@ function load(input) {
   const data = fs
     .readFileSync(input, { encoding: "utf-8" })
     .split("\n")
-    .map((line) => {
+    .map((line, lineIndex) => {
       if (/^import "[/.].+"$/.test(line)) {
-        const modulepath =
-          path.resolve(path.dirname(input), line.split('"')[1]) + ".wren";
-        if (modules[modulepath]) {
-          return null;
+        try {
+          const modulepath =
+            path.resolve(path.dirname(input), line.split('"')[1]) + ".wren";
+          if (modules[modulepath]) {
+            return null;
+          }
+          if (loading[modulepath]) {
+            throw new Error(`circular reference`);
+          }
+          loading[modulepath] = true;
+          let moduledata = load(modulepath).trim();
+          loading[modulepath] = false;
+          modules[modulepath] = true;
+          return "\n" + moduledata;
+        } catch (err) {
+          console.error(`${line} failed in ${input}:${lineIndex + 1}`);
+          console.error(err);
         }
-        if (loading[modulepath]) {
-          throw new Error(`circular reference`);
-        }
-        loading[modulepath] = true;
-        let moduledata = load(modulepath).trim();
-        loading[modulepath] = false;
-        modules[modulepath] = true;
-        return "\n" + moduledata;
       }
       if (line.endsWith(versionTag)) {
         const now = new Date();

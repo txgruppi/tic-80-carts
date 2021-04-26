@@ -1,51 +1,30 @@
 class Vec2d {
 	static zero {
-		if (__zero == null) {
-			__zero = Vec2d.new(0, 0)
-		}
-		return __zero
+		return Vec2d.new(0, 0)
 	}
 
 	static unit {
-		if (__unit == null) {
-			__unit = Vec2d.new(1, 1)
-		}
-		return __unit
+		return Vec2d.new(1, 1)
 	}
 
 	static left {
-		if (__left == null) {
-			__left = Vec2d.new(-1, 0)
-		}
-		return __left
+		return Vec2d.new(-1, 0)
 	}
 
 	static right {
-		if (__right == null) {
-			__right = Vec2d.new(1, 0)
-		}
-		return __right
+		return Vec2d.new(1, 0)
 	}
 
 	static up {
-		if (__up == null) {
-			__up = Vec2d.new(0, -1)
-		}
-		return __up
+		return Vec2d.new(0, -1)
 	}
 
 	static down {
-		if (__down == null) {
-			__down = Vec2d.new(0, 1)
-		}
-		return __down
+		return Vec2d.new(0, 1)
 	}
 
-	static tile {
-		if (__tile == null) {
-			__tile = Vec2d.new(8, 8)
-		}
-		return __tile
+	static tileSize {
+		return Vec2d.new(8, 8)
 	}
 
 	construct new(x, y) {
@@ -59,7 +38,7 @@ class Vec2d {
 	y { _y }
 	y=(o) { _y = o }
 
-	toString { "Vec2d(" + _x.toString + "," + _y.toString + ")" }
+	toString { "Vec2d(%(_x),%(_y))" }
 
 	clone { Vec2d.new(_x, _y) }
 
@@ -111,6 +90,12 @@ class Vec2d {
 	abs {
 		_x = _x.abs
 		_y = _y.abs
+		return this
+	}
+
+	floor {
+		_x = _x.floor
+		_y = _y.floor
 		return this
 	}
 
